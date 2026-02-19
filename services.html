@@ -1,0 +1,660 @@
+<!DOCTYPE html><html lang="he" dir="rtl" data-zappy-site-type="ecommerce"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>שירותים - קרנית מלמד</title>
+  <meta name="description" content="שירותים - קרנית מלמד provides professional קוסמטיקה services. Specializing in קרנית מלמד.">
+  <meta name="keywords" content="קרנית מלמד, קוסמטיקה יוקרתית אונליין ישראל, קודי קופון קוסמטיקה, איפה לקנות קוסמטיקה מקורית בישראל">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="שירותים - קרנית מלמד">
+  <meta property="og:description" content="שירותים - קרנית מלמד provides professional קוסמטיקה services. Specializing in קרנית מלמד.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="שירותים - קרנית מלמד">
+  <meta name="twitter:description" content="שירותים - קרנית מלמד provides professional קוסמטיקה services. Specializing in קרנית מלמד.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'fa5bf743-f245-41c1-bf65-a90a7361602f',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-search-panel" id="mobile-search-panel">
+      <div class="search-wrapper">
+        <input type="text" id="mobile-search-input" placeholder="חיפוש מוצרים..." autocomplete="off">
+        <button class="search-submit" id="mobile-search-submit" title="חיפוש">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <button class="close-search" id="close-mobile-search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="search-results" id="mobile-search-results"></div>
+    </div>
+  
+<script>window.ZAPPY_WEBSITE_ID = "fa5bf743-f245-41c1-bf65-a90a7361602f";window.ZAPPY_API_BASE = (window.location.pathname.includes('/preview') ? "https://api.zappy5.com" : "https://api.zappy5.com");</script>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/logo.webp" alt="קרנית מלמד" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu">
+
+    <li class="menu-item-has-children zappy-products-dropdown">
+      <a href="/products">
+        מוצרים
+        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </a>
+      <ul class="sub-menu" id="zappy-nav-category-links">
+        <li><a href="/products">כל המוצרים</a></li>
+        <!-- Categories will be loaded dynamically -->
+      </ul>
+    </li>
+  <li><a href="/about">אודות</a></li><li><a href="/services">שירותים</a></li><li><a href="/contact">צור קשר</a></li></ul><div class="nav-ecommerce-icons nav-icons-left"><a href="/login" class="login-link nav-login" title="התחברות"><svg class="login-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a><a href="#cart" class="cart-link nav-cart" id="cart-drawer-toggle" title="עגלת קניות"><svg class="cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span class="cart-count">0</span></a><div class="nav-search-box">
+    <input type="text" class="nav-search-input" id="nav-search-input" placeholder="חיפוש מוצרים..." autocomplete="off">
+    <button class="nav-search-btn" id="nav-search-btn" title="חיפוש">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </button>
+    <div class="nav-search-results" id="nav-search-results"></div>
+  </div></div><div class="nav-ecommerce-icons nav-icons-right"><button class="nav-search-toggle" id="mobile-search-toggle" title="חיפוש"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button></div>
+    
+    
+  </div>
+</nav>
+
+    <nav class="zappy-catalog-menu rtl" id="zappy-catalog-menu" dir="rtl">
+      <div class="catalog-menu-container">
+        <a href="/products" class="catalog-menu-item catalog-menu-all">כל המוצרים</a>
+        <div class="catalog-menu-categories" id="zappy-category-links">
+          <!-- Categories will be loaded dynamically -->
+        </div>
+      </div>
+    </nav>
+  
+  
+  <main>
+    <section class="services-intro-section" data-layout-spec="שירותים-intro">
+  <div class="services-intro-container">
+    <div class="services-intro-header">
+      <h2>שירותים והדרכה מקצועית</h2>
+      <p class="services-intro-lead">ברוכים הבאים למרחב שבו קוסמטיקה יוקרתית פוגשת הדרכה אישית. כאן תמצאו מדריכים מקצועיים, המלצות מותאמות אישית וידע מעמיק על מוצרי טיפוח איכותיים.</p>
+    </div>
+
+    <div class="services-intro-content-wrapper">
+      <div class="services-intro-text-panel">
+        <h3>גישה מעודנת ואישית</h3>
+        <p>האתר שלנו מהווה מרחב ייעוצי וחינוכי, שבו אנו מציעים הדרכה מקצועית בעולם הקוסמטיקה היוקרתית. זהו לא חנות מקוונת – זהו מקום שבו תקבלו ידע, המלצות מבוססות ניסיון ותובנות שיסייעו לכם לבחור את המוצרים המתאימים ביותר לצרכיכם האישיים.</p>
+      </div>
+
+      <div class="services-intro-image-wrapper">
+        <div class="services-intro-image-border">
+          <img data-placeholder="services-intro-image-1" data-context="Close-up macro photography of luxury cosmetic product texture - creamy white moisturizer with silky smooth surface, soft focus, elegant minimal aesthetic, professional beauty photography for premium skincare brand" width="600" height="700" src="/assets/site-services-intro-image-1.webp" alt="מרקם קרם פנים יוקרתי">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="services-intro-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="services-intro-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#E9DFE5;stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:#D4C4D0;stop-opacity:1"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,100 L0,30 Q200,25 400,32 T800,28 Q1000,35 1200,30 L1200,100 Z" fill="url(#services-intro-gradient)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="services-section" data-layout-spec="שירותים-services">
+  <div class="services-container">
+    <div class="services-header">
+      <h2>במה נוכל לעזור לך</h2>
+      <p>שירותי ייעוץ קוסמטיקה מקצועיים המותאמים אישית לצרכים שלך – ממציאת הגוון המושלם ועד הכנה לאירועים מיוחדים</p>
+    </div>
+    
+    <div class="services-grid">
+      <!-- Card 1 - Featured with stamp -->
+      <article class="service-card service-card-featured">
+        <div class="offer-stamp">
+          <span>הצעה מיוחדת</span>
+        </div>
+        <h3>שדרוג שגרת הטיפוח</h3>
+        <p>ייעוץ מקיף לבניית שגרת טיפוח אופטימלית המותאמת לסוג העור שלך, כולל המלצות למוצרים איכוtiים והדרכה ליישום נכון</p>
+      </article>
+      
+      <!-- Card 2 -->
+      <article class="service-card">
+        <h3>מציאת הגוון המושלם</h3>
+        <p>התאמה מדויקת של גוונים לעור ולטון הפנים, כולל בדיקת פינישים שונים והמלצות לבסיסים ומוצרי איפור מותאמים אישית</p>
+      </article>
+      
+      <!-- Card 3 -->
+      <article class="service-card">
+        <h3>התאמת מרקם ונוסחה</h3>
+        <p>ייעוץ מקצועי למציאת המרקם והנוסחה המתאימים ביותר לעור שלך – מג'לים קלילים ועד קרמים עשירים, בהתאם לעונה ולצרכים</p>
+      </article>
+      
+      <!-- Card 4 -->
+      <article class="service-card">
+        <h3>פתרונות לעור רגיש</h3>
+        <p>המלצות מותאמות לעור רגיש או בעייתי, כולל זיהוי מרכיבים פוטנציאליים לגירוי והצעת חלופות עדינות ואפקטיביות</p>
+      </article>
+      
+      <!-- Card 5 -->
+      <article class="service-card">
+        <h3>עדכון עונתי</h3>
+        <p>התאמת שגרת הטיפוח למעברי העונות – מהגנה מפני שמש בקיץ ועד לחות אינטנסיבית בחורף, עם מוצרים מתאימים לכל תקופה</p>
+      </article>
+      
+      <!-- Card 6 -->
+      <article class="service-card">
+        <h3>הכנה לאירועים מיוחדים</h3>
+        <p>ייעוץ מקיף להכנת העור לאירועים – חתונות, צילומים או אירועים חשובים, כולל טיפולי הכנה ומוצרי איפור עמידים ומושלמים</p>
+      </article>
+    </div>
+  </div>
+  
+  <!-- Bottom scalloped divider -->
+  <div class="services-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,30 Q30,20 60,30 T120,30 Q150,20 180,30 T240,30 Q270,20 300,30 T360,30 Q390,20 420,30 T480,30 Q510,20 540,30 T600,30 Q630,20 660,30 T720,30 Q750,20 780,30 T840,30 Q870,20 900,30 T960,30 Q990,20 1020,30 T1080,30 Q1110,20 1140,30 T1200,30 L1200,60 Z" fill="var(--bg-dark)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="שירותים-ingredients-section" data-layout-spec="שירותים-ingredients">
+  <div class="שירותים-ingredients-container">
+    <div class="שירותים-ingredients-header">
+      <h2>רגישות למרכיבים</h2>
+      <p>אנחנו בוחרים כל מרכיב בקפידה, עם דגש על נוחות, גימור משי וחוויה שמרגישה נכון על העור. כל פורמולה מספרת סיפור של איכות ותשומת לב.</p>
+    </div>
+
+    <div class="שירותים-ingredients-grid">
+      <article class="שירותים-ingredients-tile">
+        <div class="שירותים-ingredients-tile-image-wrapper">
+          <img data-placeholder="שירותים-ingredients-image-1" data-context="Macro close-up photograph of delicate botanical ingredients for luxury cosmetics - soft pink rose petals with morning dew drops, natural organic beauty, soft focus background, professional cosmetic photography for Israeli premium beauty brand" width="600" height="400" src="/assets/site-ingredients-image-1.webp" alt="השראה בוטנית - מרכיבים טבעיים">
+        </div>
+        <div class="שירותים-ingredients-tile-content">
+          <h3>השראה בוטנית</h3>
+          <p>מתחילים בטבע – תמציות צמחים עדינות, שמנים אתריים ותמציות פרחים שנבחרו בקפידה. כל מרכיב מביא איתו את הטוב שבטבע, מעניק לעור תחושה של רעננות ורכות טבעית.</p>
+        </div>
+      </article>
+
+      <article class="שירותים-ingredients-tile">
+        <div class="שירותים-ingredients-tile-image-wrapper">
+          <img data-placeholder="שירותים-ingredients-image-2" data-context="Scientific laboratory texture photograph - cosmetic cream texture under microscope, smooth emulsion structure, professional beauty science photography showing silky finish and advanced formulation for premium Israeli cosmetics brand" width="600" height="400" src="/assets/site-ingredients-image-2.webp" alt="מדע המרקם - פורמולות מתקדמות">
+        </div>
+        <div class="שירותים-ingredients-tile-content">
+          <h3>מדע המרקם</h3>
+          <p>הטכנולוגיה שמאחורי הרגשה – פורמולות מתקדמות שנספגות במהירות, משאירות גימור משי ללא שאריות. כל מוצר עובר בדיקות קפדניות כדי להבטיח מרקם מושלם ותחושה נעימה.</p>
+        </div>
+      </article>
+
+      <article class="שירותים-ingredients-tile">
+        <div class="שירותים-ingredients-tile-image-wrapper">
+          <img data-placeholder="שירותים-ingredients-image-3" data-context="Elegant close-up of luxurious cosmetic product application on skin - smooth silky texture, comfortable wear throughout the day, soft natural lighting, premium beauty photography for Israeli high-end cosmetics showcasing comfort and wearability" width="600" height="400" src="/assets/site-ingredients-image-3.webp" alt="נוחות לאורך היום - עמידות ורכות">
+        </div>
+        <div class="שירותים-ingredients-tile-content">
+          <h3>נוחות לאורך היום</h3>
+          <p>תחושה שנשארת איתך – מוצרים שמעניקים עמידות ללא פשרות על הנוחות. העור נושם, המרקם נשאר רך, והתוצאה נראית טבעית ורעננה משעות הבוקר ועד הערב.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="שירותים-ingredients-backplate" aria-hidden="true"></div>
+  </div>
+
+  <div class="שירותים-ingredients-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="שירותים-ingredients-fade-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#1D1630;stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:#F2ECFF;stop-opacity:1"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1200" height="100" fill="url(#שירותים-ingredients-fade-gradient)"></rect>
+    </svg>
+  </div>
+</section>
+
+<section class="services-results-section" data-layout-spec="שירותים-results">
+  <div class="services-results-container">
+    <div class="services-results-header">
+      <h2>גימורים שאנחנו אוהבות</h2>
+      <p>כל טיפול מסתיים בגימור ייחודי שמדגיש את היופי הטבעי שלך. אנחנו מאמינות שעור מטופח הוא עור שנושם, זוהר ומרגיש כמו משי. בין אם את מחפשת זוהר טבעי, מרקם קטיפתי או אלגנטיות מינימלית – אנחנו יוצרות את הלוק המושלם בשבילך.</p>
+    </div>
+
+    <div class="services-results-gallery">
+      <div class="services-results-item">
+        <div class="services-results-image-wrapper">
+          <img data-placeholder="services-results-image-1" data-context="Close-up beauty photography of luminous, dewy skin with natural glow, soft focus on cheekbone area, delicate highlight on high points of face, professional cosmetics result, editorial beauty style, clean and fresh aesthetic" width="600" height="400" src="/assets/site-services-results-image-1.webp" alt="עור זוהר עם גימור טבעי">
+        </div>
+        <h3>זוהר טבעי כמו אור</h3>
+        <p>גימור שמדגיש את הזוהר הפנימי שלך. עור שנראה כאילו הוא נוצץ מבפנים, עם נגיעות עדינות של אור על נקודות ההדגשה. תחושה רעננה, חיונית ומלאת חיים.</p>
+      </div>
+
+      <div class="services-results-item">
+        <div class="services-results-image-wrapper">
+          <img data-placeholder="services-results-image-2" data-context="Soft-focus beauty shot of velvety smooth skin texture, matte finish with subtle dimension, professional makeup result, dreamy and elegant aesthetic, pastel tones, luxury cosmetics photography" width="600" height="400" src="/assets/site-services-results-image-2.webp" alt="עור קטיפתי עם גימור מט">
+        </div>
+        <h3>קטיפה רכה ומעודנת</h3>
+        <p>מרקם עדין ומט שמרגיש כמו קטיפה על העור. גימור שמטשטש קמטוטים עדינים ויוצר מראה חלק ואחיד, עם עומק עדין שמוסיף ממד ללא זוהר מיותר. אלגנטיות טהורה.</p>
+      </div>
+
+      <div class="services-results-item">
+        <div class="services-results-image-wrapper">
+          <img data-placeholder="services-results-image-3" data-context="Minimalist beauty close-up of polished, refined skin with clean finish, subtle sheen, modern and sophisticated aesthetic, professional cosmetics result, editorial style with neutral tones" width="600" height="400" src="/assets/site-services-results-image-3.webp" alt="עור מלוטש עם גימור מינימליסטי">
+        </div>
+        <h3>אלגנטיות מינימלית מלוטשת</h3>
+        <p>גימור נקי ומעודן שמדגיש את יופיו הטבעי של העור. מראה מלוטש עם ברק עדין, ללא עומס או שכבות מיותרות. פשטות מתוחכמת שמדברת בשקט ומרשימה בעוצמה.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="services-results-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="branch-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#4B2A57;stop-opacity:0.15"></stop>
+          <stop offset="48%" style="stop-color:#4B2A57;stop-opacity:0.35"></stop>
+          <stop offset="52%" style="stop-color:#4B2A57;stop-opacity:0.35"></stop>
+          <stop offset="100%" style="stop-color:#4B2A57;stop-opacity:0.15"></stop>
+        </linearGradient>
+      </defs>
+      <!-- Thin botanical branch line -->
+      <path d="M0,40 Q200,38 400,42 T580,38" stroke="url(#branch-gradient)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      <!-- Center flourish -->
+      <g transform="translate(600,38)">
+        <circle cx="0" cy="0" r="3" fill="#4B2A57" opacity="0.3"></circle>
+        <path d="M-8,-6 Q-4,-8 0,-6 Q4,-8 8,-6" stroke="#4B2A57" stroke-width="1.2" fill="none" opacity="0.25"></path>
+        <path d="M-6,4 Q-3,6 0,4 Q3,6 6,4" stroke="#4B2A57" stroke-width="1.2" fill="none" opacity="0.25"></path>
+      </g>
+      <!-- Right side branch -->
+      <path d="M620,42 T800,38 Q1000,42 1200,40" stroke="url(#branch-gradient)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      <!-- Subtle curve transition fill -->
+      <path d="M0,80 L0,50 Q300,48 600,52 Q900,48 1200,50 L1200,80 Z" fill="var(--bg-dark)" opacity="0.6"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="services-faq-section" data-layout-spec="שירותים-faq">
+  <div class="services-faq-container">
+    <div class="services-faq-header">
+      <h2>שאלות נפוצות</h2>
+      <p>כל מה שרצית לדעת על ייעוץ קוסמטי מותאם אישית ובחירת מוצרים מושלמים לעור שלך</p>
+    </div>
+    
+    <div class="services-faq-list">
+      <div class="services-faq-item">
+        <h3>איך עובד תהליך ההמלצות המותאמות אישית?</h3>
+        <p>התהליך מתחיל בשיחה אישית שבה אני מכירה את סוג העור שלך, את השגרה הנוכחית ואת המטרות שלך. לאחר מכן, אני בוחנת את המוצרים הקיימים שלך, מזהה חוסרים או חפיפות מיותרות, ובונה תוכנית טיפוח ייעודית. ההמלצות שלי מבוססות על ידע מקצועי עמוק, הכרות עם מגוון רחב של מותגים איכותיים, והתאמה מדויקת לצרכים האישיים שלך – כך שתדעי בדיוק מה לקנות, מתי להשתמש ולמה זה חשוב.</p>
+      </div>
+      
+      <div class="services-faq-item">
+        <h3>איזה מידע אני צריכה להכין לפני הייעוץ?</h3>
+        <p>כדי להפיק את המקסימום מהייעוץ, מומלץ להכין רשימה של המוצרים שאת משתמשת בהם כיום (או להביא אותם לפגישה), לחשוב על בעיות העור שמטרידות אותך – כמו יובש, אדמומיות, קמטים או כתמים – ולציין אם יש לך רגישויות או אלרגיות ידועות. גם אם אין לך מושג מאיפה להתחיל, זה בסדר גמור! אני כאן בדיוק בשביל זה – להדריך אותך צעד אחר צעד ולבנות איתך שגרה פשוטה, יעילה ומותאמת.</p>
+      </div>
+      
+      <div class="services-faq-item">
+        <h3>האם השירות מתאים גם לעור רגיש או בעייתי?</h3>
+        <p>בהחלט! עור רגיש, נוטה לאקנה, או עור עם בעיות דרמטולוגיות דורש תשומת לב מיוחדת, ואני מתמחה בדיוק בזה. אני בוחרת מוצרים עדינים, היפואלרגניים וללא מרכיבים מגרים, ובונה שגרה שמרגיעה ומחזקת את מחסום העור. אם את מטופלת אצל רופא עור, אני יכולה לשלב את ההמלצות שלי עם ההנחיות הרפואיות שלו, כך שהכל יעבוד ביחד בהרמוניה מושלמת.</p>
+      </div>
+      
+      <div class="services-faq-item">
+        <h3>כמה זמן לוקח עד שרואים שיפור בעור?</h3>
+        <p>תוצאות ראשוניות – כמו לחות משופרת ומרקם עור חלק יותר – ניתן להרגיש כבר לאחר שבועיים עד שלושה. שיפורים עמוקים יותר, כמו דהייה של כתמים, הפחתת קמטים עדינים או איזון ייצור השומן, דורשים סבלנות של 6-8 שבועות לפחות. העור שלנו מתחדש במחזורים של כ-28 ימים, ולכן עקביות היא המפתח. אני תמיד כאן כדי לעקוב איתך אחרי ההתקדמות, לעדכן המלצות ולוודא שאת מרגישה תמיכה לאורך כל הדרך.</p>
+      </div>
+      
+      <div class="services-faq-item">
+        <h3>איך אני ממשיכה לשפר את השגרה שלי לאורך זמן?</h3>
+        <p>העור שלנו משתנה עם הזמן – בגלל עונות, גיל, שינויים הורמונליים או אורח חיים. אני ממליצה על מעקב תקופתי כל 3-6 חודשים, שבו נבחן ביחד את התוצאות, נתאים את המוצרים לצרכים החדשים ונוסיף טיפולים משלימים במידת הצורך. בנוסף, אני תמיד זמינה לשאלות בין הפגישות – אם קניתי מוצר חדש ולא בטוחה איך לשלב אותו, או אם יש שינוי פתאומי בעור. המטרה שלי היא שתרגישי ביטחון מלא בשגרת הטיפוח שלך.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-container"><div class="footer-content"><div class="footer-section company-info"><img src="/assets/logo.webp" alt="קרנית מלמד" class="logo" /><p class="footer-description">מומחית לקוסמטיקה מתקדמת וטיפולי יופי מקצועיים</p></div><div class="footer-section quick-links"><h3 class="footer-heading">קישורים מהירים</h3><ul class="footer-links"><li><a href="/about">אודות</a></li><li><a href="/services">שירותים</a></li><li><a href="/contact">צור קשר</a></li></ul></div><div class="footer-section contact-info"><h3 class="footer-heading">יצירת קשר</h3><ul class="contact-list"><li><i class="fas fa-envelope"></i><a href="mailto:[business_email]">[business_email]</a></li><li><i class="fas fa-phone"></i><a href="tel:[business_phone]">[business_phone]</a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div><div class="footer-section social-section"><h3 class="footer-heading">עקבו אחרינו</h3><div class="social-links"><a href="[facebook_handle]" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="footer-bottom"><div class="legal-links"><a href="/privacy">מדיניות פרטיות</a><span class="separator">|</span><a href="/terms">תנאים והגבלות</a><span class="separator">|</span>
+            <a href="/return-policy" aria-label="מדיניות החזרות">
+              מדיניות החזרות
+            </a><span class="separator">|</span><a href="/accessibility">הצהרת נגישות</a></div><div class="copyright"><p>© 2026 קרנית מלמד. כל הזכויות שמורות.</p></div><div class="attribution"><a href="https://zappy5.com" target="_blank" class="zappy-attribution" rel="noopener noreferrer">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
